@@ -334,7 +334,7 @@ class ConfigHelperTest(unittest.TestCase):
   def test_image_default_missing_repo(self):
     self.assertRaisesRegex(
         config_helper.InvalidSchema,
-        r'.*default image value must state registry',
+        r'.*default image value must state valid registry host',
         lambda: config_helper.Schema.load_yaml("""
         properties:
           i:

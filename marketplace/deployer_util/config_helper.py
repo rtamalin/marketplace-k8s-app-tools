@@ -919,9 +919,13 @@ class SchemaXImage:
 
     if not default:
       raise InvalidSchema('default image value must be specified')
-    if not default.startswith('gcr.io'):
+    reg_host = default.split('/')[0]
+    if not((reg_host == 'gcr.io') or
+           reg_host.endswith('.gcr.io') or
+           reg_host.endswith('-docker.pkg.dev')):
       raise InvalidSchema(
-          'default image value must state registry: {}'.format(default))
+          'default image value must state valid registry host: {}'.format(
+              default))
     if ':' not in default:
       raise InvalidSchema(
           'default image value is missing a tag or digest: {}'.format(default))
